@@ -24,9 +24,8 @@ def save_file(file, name, save_folder):
     logging.debug("Finished writing: " + name)
 
 def create_random_sample(file):
-    """Creates a random sample that is SAMPLE_SIZE per cent from the original dataframe."""
+    """Creates a random sample that is 10 per cent from the original dataframe."""
     percent_selection = np.random.choice([False, True], len(file), p=[0.90, 0.10])
-    # percent_selection = np.random.rand(len(file)) < 0.1
     df_sample = file[percent_selection]
     df_rest = file.drop(df_sample.index)
     return df_sample, df_rest
@@ -67,17 +66,6 @@ def main(folder_to_read):
         combine_individual_samples("./save/sample10/")
     else:
         print("You didn't give a folder containing the data.")
-    # logging.basicConfig(format='%(levelname)s:%(message)s', level=logging.DEBUG)
-    # logging.debug("Entering main")
-    # df = open_file("1.csv")
-    # df_mini = df[1:100]
-    # df_sample10, df_rest90 = create_random_sample(df)
-    # #print(df_sample10[1:10])
-    # #print(df_rest90[1:10])
-    # print(len(df_sample10))
-    # print(len(df_rest90))
-    # save_file(df_sample10, "Sample10")
-    # save_file(df_rest90, "Rest90")
 
 
 if __name__ == "__main__":
