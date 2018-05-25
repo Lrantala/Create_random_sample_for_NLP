@@ -30,14 +30,14 @@ def create_random_sample(file):
     df_rest = file.drop(df_sample.index)
     return df_sample, df_rest
 
-def combine_individual_samples(sample_folder):
+def combine_individual_samples(sample_folder, name, save_folder_name):
     filelist = read_folder_contents(sample_folder)
     merged_csvs = []
     for f in filelist:
         df = open_file(sample_folder + "/" + f)
         merged_csvs.append(df)
     final_csv = pd.concat(merged_csvs)
-    save_file(final_csv, "merged10", "merged10")
+    save_file(final_csv, name, save_folder_name)
 
 def read_arguments(arguments):
     if len(arguments) == 2:
@@ -63,7 +63,8 @@ def main(folder_to_read):
             rest_name = "Rest90_" + str(x)
             save_file(df_sample10, sample__name, "sample10")
             save_file(df_rest90, rest_name, "rest90")
-        combine_individual_samples("./save/sample10/")
+        combine_individual_samples("./save/sample10/", "merged10", "merged10")
+        combine_individual_samples("./save/rest90/", "merged90", "merged90")
     else:
         print("You didn't give a folder containing the data.")
 
